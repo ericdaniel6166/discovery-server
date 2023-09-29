@@ -21,6 +21,9 @@ eureka:
       defaultZone: http://${app.hostname}:${app.server-port}/eureka
   instance:
     hostname: ${app.hostname}}
+  server:
+    expected-client-renewal-interval-seconds: 5
+    use-read-only-response-cache: false
 
 management:
   health:
