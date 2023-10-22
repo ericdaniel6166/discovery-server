@@ -1,2 +1,3 @@
 app:
   hostname: discovery-server
+  zipkin-hostname: zipkin
