@@ -2,6 +2,9 @@ app:
   hostname: localhost
   server-port: 8761
   application-name: discovery-server
+  zipkin-hostname: localhost
+  zipkin-server-port: 9411
+  zipkin-context-path: api/v2/spans
 
 spring:
   application:
@@ -26,9 +29,12 @@ eureka:
     use-read-only-response-cache: false
 
 management:
-  health:
-    circuitbreakers:
-      enabled: true
+  tracing:
+    enabled: true
+    propagation:
+      type: b3
+    sampling:
+      probability: 1.0
   endpoints:
     web:
       exposure:
@@ -36,6 +42,9 @@ management:
   endpoint:
     health:
       show-details: always
+  zipkin:
+    tracing:
+      endpoint: http://${app.zipkin-hostname}:${app.zipkin-server-port}/${app.zipkin-context-path}
 
 logging:
   level:
